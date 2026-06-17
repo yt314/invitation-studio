@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// Security rules for Invite Studio.
+// - A user can read/write ONLY their own profile (users/{uid}).
+// - A user can read/write ONLY their own designs (designs where userId == uid).
+// - Templates, backgrounds, stickers and palettes live in the app code,
+//   NOT in Firestore, so there is nothing public to expose here.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Designs — each document carries a `userId` field with the owner's uid.
+    match /designs/{designId} {
+      allow read: if signedIn() && resource.data.userId == request.auth.uid;
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // Everything else is denied by default.
+  }
+}

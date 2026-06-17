@@ -42,15 +42,54 @@
   box-shadow: var(--sh-lg);
 }
 .card__preview {
+  display: block;
+  width: 100%;
   aspect-ratio: 5 / 7;
   background: var(--surface-3);
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .card__meta {
-  padding: 14px 16px;
+  padding: 14px 16px 6px;
 }
 .card__meta h3 {
   font-size: 16px;
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__date {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.card__actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px 14px;
+}
+.cact {
+  flex: 1;
+  padding: 8px 6px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-sm);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: all 0.15s;
+}
+.cact:hover:not(:disabled) {
+  border-color: var(--brand-300);
+  color: var(--ink);
+}
+.cact:disabled {
+  opacity: 0.5;
+}
+.cact--danger:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
 /* Skeletons */

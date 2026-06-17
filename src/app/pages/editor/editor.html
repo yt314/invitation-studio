@@ -1,3 +1,10 @@
+@if (loading()) {
+  <div class="ed__loading">
+    <div class="ed__loading-ring"></div>
+    <p>טוען את העיצוב…</p>
+  </div>
+}
+
 <div class="ed">
   <!-- Top bar -->
   <header class="ed__top">
@@ -14,8 +21,13 @@
     </div>
 
     <div class="ed__top-actions">
-      <button class="ed__act ed__act--ghost" (click)="comingSoon()">💾 שמירה</button>
-      <button class="ed__act ed__act--primary" (click)="comingSoon()">⬇ הורדה</button>
+      @if (currentId()) {
+        <button class="ed__act ed__act--ghost" (click)="saveCopy()" [disabled]="saving()">⧉ עותק</button>
+      }
+      <button class="ed__act ed__act--ghost" (click)="save()" [disabled]="saving()">
+        {{ saving() ? '… שומר' : (currentId() ? '💾 עדכון' : '💾 שמירה') }}
+      </button>
+      <button class="ed__act ed__act--primary" (click)="downloadSoon()">⬇ הורדה</button>
     </div>
   </header>
 

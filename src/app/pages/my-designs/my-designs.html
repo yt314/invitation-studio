@@ -3,7 +3,7 @@
     <div>
       <span class="eyebrow">לוח העיצובים שלי</span>
       <h1>העיצובים שלי</h1>
-      <p>שלום {{ auth.user()?.displayName }} — כאן יופיעו כל ההזמנות שיצרתם.</p>
+      <p>שלום {{ auth.user()?.displayName }} — כאן מופיעים כל העיצובים ששמרתם.</p>
     </div>
     <app-button variant="primary" link="/editor">+ עיצוב חדש</app-button>
   </div>
@@ -34,14 +34,30 @@
     <div class="grid">
       @for (d of designs(); track d.id) {
         <article class="card">
-          <div class="card__preview">
+          <button class="card__preview" (click)="edit(d)" title="עריכה">
             <app-design-preview [design]="d" />
-          </div>
+          </button>
           <div class="card__meta">
             <h3>{{ d.title }}</h3>
+            <span class="card__date">עודכן {{ formatDate(d.updatedAt) }}</span>
+          </div>
+          <div class="card__actions">
+            <button class="cact" (click)="edit(d)" title="עריכה">✏️ עריכה</button>
+            <button class="cact" (click)="duplicate(d)" [disabled]="busyId() === d.id" title="שכפול">
+              {{ busyId() === d.id ? '…' : '⧉ שכפול' }}
+            </button>
+            <button class="cact cact--danger" (click)="askDelete(d)" title="מחיקה">🗑 מחיקה</button>
           </div>
         </article>
       }
     </div>
   }
 </div>
+
+<app-modal [open]="!!deleteTarget()" heading="מחיקת עיצוב" (closed)="deleteTarget.set(null)">
+  <p>למחוק את העיצוב «{{ deleteTarget()?.title }}»? פעולה זו אינה הפיכה.</p>
+  <div modal-footer>
+    <app-button variant="danger" (pressed)="confirmDelete()">כן, מחק</app-button>
+    <app-button variant="ghost" (pressed)="deleteTarget.set(null)">ביטול</app-button>
+  </div>
+</app-modal>

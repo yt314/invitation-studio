@@ -68,7 +68,8 @@ export type DesignElement = TextElement | ShapeElement | StickerElement;
 
 export interface DesignDocument {
   id?: string;
-  ownerId?: string;
+  /** Firebase uid of the design owner (set on save). */
+  userId?: string;
   title: string;
   /** Canvas aspect — invitations are usually portrait. */
   canvas: {
@@ -92,7 +93,7 @@ export interface TemplateDefinition {
   category: TemplateCategory;
   /** Short Hebrew tagline shown on the card. */
   tagline: string;
-  design: Omit<DesignDocument, 'id' | 'ownerId' | 'createdAt' | 'updatedAt' | 'preview'>;
+  design: Omit<DesignDocument, 'id' | 'userId' | 'createdAt' | 'updatedAt' | 'preview'>;
 }
 
 export type TemplateCategory =

@@ -38,8 +38,8 @@ export class Login {
       this.toast.success('התחברת בהצלחה! ברוכים השבים 👋');
       const redirect = this.route.snapshot.queryParamMap.get('redirect') || '/my-designs';
       this.router.navigateByUrl(redirect);
-    } catch {
-      this.toast.error('ההתחברות נכשלה. בדקו את הפרטים ונסו שוב.');
+    } catch (e) {
+      this.toast.error((e as Error).message || 'ההתחברות נכשלה. בדקו את הפרטים ונסו שוב.');
     } finally {
       this.loading.set(false);
     }

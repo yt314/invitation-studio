@@ -37,8 +37,8 @@ export class Register {
       await this.auth.register(name, email, password);
       this.toast.success('החשבון נוצר בהצלחה! ברוכים הבאים 🎉');
       this.router.navigateByUrl('/my-designs');
-    } catch {
-      this.toast.error('ההרשמה נכשלה. ייתכן שהאימייל כבר בשימוש.');
+    } catch (e) {
+      this.toast.error((e as Error).message || 'ההרשמה נכשלה. ייתכן שהאימייל כבר בשימוש.');
     } finally {
       this.loading.set(false);
     }
