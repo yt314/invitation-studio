@@ -1,0 +1,136 @@
+:host {
+  display: block;
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+.panel-sub {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.group {
+  margin-top: 20px;
+}
+.group-name {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* Add text button */
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-md);
+  text-align: start;
+  transition: border-color 0.16s, box-shadow 0.16s, transform 0.16s;
+}
+.add-btn:hover {
+  border-color: var(--brand-400);
+  box-shadow: var(--sh-sm);
+  transform: translateY(-1px);
+}
+.add-btn__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--grad-brand-soft);
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--brand-700);
+  flex: none;
+}
+.add-btn__txt {
+  display: flex;
+  flex-direction: column;
+}
+.add-btn__txt b {
+  font-size: 15px;
+}
+.add-btn__txt small {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* Shapes */
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.shape-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-md);
+  transition: border-color 0.16s, transform 0.16s;
+}
+.shape-btn small {
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+.shape-btn:hover {
+  border-color: var(--brand-400);
+  transform: translateY(-1px);
+}
+.shape-prev {
+  width: 26px;
+  height: 26px;
+  background: var(--brand-300);
+}
+.shape-prev--rect {
+  border-radius: 5px;
+}
+.shape-prev--circle {
+  border-radius: 50%;
+}
+.shape-prev--line {
+  height: 4px;
+  border-radius: 3px;
+  align-self: center;
+}
+.shape-prev--frame {
+  background: transparent;
+  border: 3px solid var(--brand-400);
+  border-radius: 5px;
+}
+
+/* Backgrounds */
+.bg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.bg {
+  aspect-ratio: 1;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  cursor: pointer;
+  background-size: cover;
+  transition: transform 0.14s, box-shadow 0.14s, border-color 0.14s;
+}
+.bg:hover {
+  transform: scale(1.07);
+  border-color: var(--brand-400);
+  box-shadow: var(--sh-sm);
+}

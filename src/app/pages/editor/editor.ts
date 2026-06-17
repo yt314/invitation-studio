@@ -1,74 +1,65 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { DesignDocument } from '../../core/models/design.model';
 import { createBlankDesign, designFromTemplate } from '../../core/services/design-factory';
 import { ToastService } from '../../core/services/toast.service';
-import { DesignPreview } from '../../shared/components/design-preview/design-preview';
-import { BACKGROUNDS } from '../../data/backgrounds/backgrounds.data';
-
-type ToolId = 'select' | 'text' | 'shapes' | 'stickers' | 'background' | 'layers';
+import { EditorStateService } from '../../editor/editor-state.service';
+import { EditorTab } from '../../editor/editor.types';
+import { CanvasEditor } from '../../editor/components/canvas-editor/canvas-editor';
+import { EditorToolbar } from '../../editor/components/editor-toolbar/editor-toolbar';
+import { AssetsPanel } from '../../editor/components/assets-panel/assets-panel';
+import { PropertiesPanel } from '../../editor/components/properties-panel/properties-panel';
+import { LayersPanel } from '../../editor/components/layers-panel/layers-panel';
+import { Modal } from '../../shared/components/modal/modal';
+import { Button } from '../../shared/components/button/button';
 
 /**
- * Editor page — Phase 1 builds the full studio layout (top bar, tool rail,
- * canvas stage, side panels) and loads a template or blank design. Background
- * switching already works to demonstrate the live canvas. Phase 2 adds the
- * interactive canvas (drag/resize/rotate) and full element editing via a
- * dedicated EditorStateService.
+ * Editor page — composes the studio layout and owns the EditorStateService
+ * instance (provided here, so every editor session starts fresh). Loads a
+ * template (via ?template=) or a blank design.
  */
 @Component({
   selector: 'app-editor',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, DesignPreview],
+  providers: [EditorStateService],
+  imports: [
+    RouterLink,
+    CanvasEditor,
+    EditorToolbar,
+    AssetsPanel,
+    PropertiesPanel,
+    LayersPanel,
+    Modal,
+    Button,
+  ],
   templateUrl: './editor.html',
   styleUrl: './editor.scss',
 })
 export class Editor {
   private readonly route = inject(ActivatedRoute);
   private readonly toast = inject(ToastService);
+  readonly state = inject(EditorStateService);
 
-  readonly design = signal<DesignDocument>(createBlankDesign());
-  readonly activeTool = signal<ToolId>('background');
-
-  readonly backgrounds = BACKGROUNDS;
-  readonly bgGroups = computed(() => ({
-    solid: BACKGROUNDS.filter((b) => b.group === 'solid'),
-    gradient: BACKGROUNDS.filter((b) => b.group === 'gradient'),
-    pattern: BACKGROUNDS.filter((b) => b.group === 'pattern'),
-  }));
-
-  readonly tools: { id: ToolId; icon: string; label: string }[] = [
-    { id: 'select', icon: '🖱️', label: 'בחירה' },
-    { id: 'text', icon: 'T', label: 'טקסט' },
-    { id: 'shapes', icon: '◻️', label: 'צורות' },
-    { id: 'stickers', icon: '✨', label: 'מדבקות' },
-    { id: 'background', icon: '🎨', label: 'רקע' },
-    { id: 'layers', icon: '📑', label: 'שכבות' },
-  ];
+  readonly tab = signal<EditorTab>('add');
+  readonly resetOpen = signal(false);
 
   constructor() {
     const templateId = this.route.snapshot.queryParamMap.get('template');
-    if (templateId) {
-      const d = designFromTemplate(templateId);
-      if (d) {
-        this.design.set(d);
-        this.toast.info('התבנית נטענה — אפשר להתחיל לערוך');
-      }
-    }
+    const design = (templateId && designFromTemplate(templateId)) || createBlankDesign();
+    this.state.load(design);
+    if (templateId) this.toast.info('התבנית נטענה — אפשר להתחיל לערוך ✨');
   }
 
-  selectTool(id: ToolId): void {
-    this.activeTool.set(id);
+  setTab(tab: EditorTab): void {
+    this.tab.set(tab);
   }
 
-  setBackground(value: string, type: 'solid' | 'gradient' | 'pattern'): void {
-    this.design.update((d) => ({ ...d, background: { type, value } }));
-  }
-
-  setTitle(value: string): void {
-    this.design.update((d) => ({ ...d, title: value }));
+  confirmReset(): void {
+    this.state.reset();
+    this.resetOpen.set(false);
+    this.toast.success('העיצוב אופס למצב ההתחלתי');
   }
 
   comingSoon(): void {
-    this.toast.info('כלי זה מתווסף בשלב הבא של העורך ✨');
+    this.toast.info('שמירה והורדה מתווספות בשלבים הבאים 🙂');
   }
 }

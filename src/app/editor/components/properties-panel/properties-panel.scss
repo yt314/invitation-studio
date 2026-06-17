@@ -1,0 +1,101 @@
+:host {
+  display: block;
+}
+
+.empty {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty__icon {
+  font-size: 36px;
+}
+.empty p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.empty small {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pp__title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 16px;
+}
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* Range slider */
+.range {
+  width: 100%;
+  accent-color: var(--brand-600);
+}
+
+/* Segmented controls */
+.seg {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 6px;
+}
+.seg__btn {
+  padding: 9px 6px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: all 0.15s;
+}
+.seg__btn:hover {
+  border-color: var(--brand-300);
+}
+.seg__btn.is-active {
+  background: var(--brand-50);
+  border-color: var(--brand-400);
+  color: var(--brand-700);
+}
+
+/* Actions */
+.pp__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.act {
+  padding: 10px 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: all 0.15s;
+}
+.act:hover {
+  border-color: var(--brand-300);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.act--danger:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}

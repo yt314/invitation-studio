@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+  background-size: cover;
+  background-position: center;
+  touch-action: none;
+  user-select: none;
+}
+
+.el {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+}
+.el:active {
+  cursor: grabbing;
+}
+.el.is-selected {
+  outline: 1.5px solid var(--brand-600);
+  outline-offset: 1px;
+}
+
+.text {
+  width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  pointer-events: none;
+}
+.fill {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.line {
+  width: 100%;
+  height: 100%;
+  border-radius: 99px;
+  pointer-events: none;
+}
+.sticker {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.sticker ::ng-deep svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Resize handles */
+.handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border: 1.5px solid var(--brand-600);
+  border-radius: 50%;
+  box-shadow: var(--sh-sm);
+  z-index: 2;
+}
+/* Physical positions so they always match the resize direction in RTL too. */
+.handle--nw {
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+}
+.handle--ne {
+  top: -6px;
+  right: -6px;
+  cursor: nesw-resize;
+}
+.handle--sw {
+  bottom: -6px;
+  left: -6px;
+  cursor: nesw-resize;
+}
+.handle--se {
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+}

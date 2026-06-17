@@ -1,0 +1,61 @@
+<div #stage class="stage" [style.background]="state.design().background.value" (pointerdown)="onStagePointerDown()">
+  @for (el of state.design().elements; track el.id) {
+    <div
+      class="el"
+      [class.is-selected]="el.id === state.selectedId()"
+      [style.left.%]="el.x"
+      [style.top.%]="el.y"
+      [style.width.%]="el.width"
+      [style.height.%]="el.height"
+      [style.transform]="'rotate(' + el.rotation + 'deg)'"
+      [style.opacity]="el.opacity"
+      (pointerdown)="onElementPointerDown($event, el)"
+    >
+      @switch (el.type) {
+        @case ('text') {
+          <div
+            class="text"
+            [style.font-family]="text(el).fontFamily"
+            [style.font-size.cqh]="text(el).fontSize"
+            [style.color]="text(el).color"
+            [style.text-align]="text(el).align"
+            [style.font-weight]="text(el).bold ? 800 : 400"
+            [style.font-style]="text(el).italic ? 'italic' : 'normal'"
+            [style.text-decoration]="text(el).underline ? 'underline' : 'none'"
+            [style.letter-spacing.cqw]="text(el).letterSpacing"
+            [style.line-height]="text(el).lineHeight"
+          >{{ text(el).text }}</div>
+        }
+        @case ('shape') {
+          @switch (shape(el).shape) {
+            @case ('line') {
+              <div class="line" [style.background]="shape(el).fill"></div>
+            }
+            @case ('circle') {
+              <div class="fill" [style.background]="shape(el).fill" [style.border-radius.%]="50"
+                   [style.border]="shape(el).strokeWidth + 'cqw solid ' + shape(el).stroke"></div>
+            }
+            @case ('frame') {
+              <div class="fill" [style.border]="shape(el).strokeWidth + 'cqw solid ' + shape(el).stroke"
+                   [style.border-radius.cqw]="shape(el).radius"></div>
+            }
+            @default {
+              <div class="fill" [style.background]="shape(el).fill" [style.border-radius.cqw]="shape(el).radius"
+                   [style.border]="shape(el).strokeWidth + 'cqw solid ' + shape(el).stroke"></div>
+            }
+          }
+        }
+        @case ('sticker') {
+          <div class="sticker" [style.color]="sticker(el).color" [innerHTML]="svgFor(sticker(el).stickerId)"></div>
+        }
+      }
+
+      @if (el.id === state.selectedId()) {
+        <span class="handle handle--nw" (pointerdown)="onHandlePointerDown($event, 'nw')"></span>
+        <span class="handle handle--ne" (pointerdown)="onHandlePointerDown($event, 'ne')"></span>
+        <span class="handle handle--sw" (pointerdown)="onHandlePointerDown($event, 'sw')"></span>
+        <span class="handle handle--se" (pointerdown)="onHandlePointerDown($event, 'se')"></span>
+      }
+    </div>
+  }
+</div>

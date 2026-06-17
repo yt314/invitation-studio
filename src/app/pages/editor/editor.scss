@@ -85,135 +85,30 @@
 .ed__body {
   flex: 1;
   display: grid;
-  grid-template-columns: 88px 280px 1fr 280px;
+  grid-template-columns: 88px 280px 1fr 290px;
   min-height: 0;
 }
 
-/* Tool rail */
 .ed__rail {
   background: var(--surface);
   border-inline-end: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 8px;
   overflow-y: auto;
 }
-.ed__tool {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  border-radius: var(--r-md);
-  padding: 11px 4px;
-  color: var(--ink-soft);
-  transition: background 0.16s, color 0.16s;
-}
-.ed__tool-icon {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
-  font-weight: 800;
-}
-.ed__tool-label {
-  font-size: 11px;
-  font-weight: 600;
-}
-.ed__tool:hover {
-  background: var(--surface-3);
-  color: var(--ink);
-}
-.ed__tool.is-active {
-  background: var(--brand-50);
-  color: var(--brand-700);
-}
 
-/* Left panel */
-.ed__panel,
-.ed__props {
+.ed__panel {
   background: var(--surface);
+  border-inline-end: 1px solid var(--line);
   overflow-y: auto;
   padding: 18px 16px;
-}
-.ed__panel {
-  border-inline-end: 1px solid var(--line);
-}
-.ed__props {
-  border-inline-start: 1px solid var(--line);
-}
-.ed__panel-title {
-  font-size: 16px;
-  font-weight: 800;
-}
-.ed__panel-sub {
-  margin-top: 4px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.ed__group {
-  margin-top: 20px;
-}
-.ed__group-name {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--ink-soft);
-}
-.ed__bg-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
-.ed__bg {
-  aspect-ratio: 1;
-  border: 1.5px solid var(--line-strong);
-  border-radius: 10px;
-  cursor: pointer;
-  background-size: cover;
-  transition: transform 0.14s, box-shadow 0.14s, border-color 0.14s;
-}
-.ed__bg:hover {
-  transform: scale(1.07);
-  border-color: var(--brand-400);
-  box-shadow: var(--sh-sm);
-}
-
-/* Coming-soon panel */
-.ed__soon {
-  text-align: center;
-  padding: 40px 10px;
-  color: var(--ink-soft);
-}
-.ed__soon-icon {
-  font-size: 42px;
-}
-.ed__soon h3 {
-  margin-top: 12px;
-  font-size: 18px;
-  color: var(--ink);
-}
-.ed__soon p {
-  margin-top: 8px;
-  font-size: 13.5px;
-}
-.ed__soon-btn {
-  margin-top: 16px;
-  background: var(--brand-50);
-  border: 1px solid var(--brand-100);
-  color: var(--brand-700);
-  font-weight: 700;
-  padding: 9px 16px;
-  border-radius: var(--r-pill);
 }
 
 /* Canvas stage */
 .ed__stage {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   padding: 28px;
   overflow: auto;
   background:
@@ -230,28 +125,34 @@
   border-radius: 6px;
   overflow: hidden;
 }
-
-/* Properties empty */
-.ed__props-empty {
-  margin-top: 30px;
-  text-align: center;
+.ed__hint {
+  font-size: 12.5px;
   color: var(--muted);
 }
-.ed__props-empty span {
-  font-size: 36px;
+
+/* Right column: properties (scroll) + layers (bottom) */
+.ed__right {
+  background: var(--surface);
+  border-inline-start: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
-.ed__props-empty p {
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--ink-soft);
+.ed__props {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px;
 }
-.ed__props-empty small {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
+.ed__layers {
+  flex: none;
+  max-height: 38%;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+  padding: 16px;
+  background: var(--surface-2);
 }
 
-/* Responsive: stack panels under the canvas on small screens */
+/* Responsive: hide side panels, keep rail + canvas usable on small screens */
 @media (max-width: 1100px) {
   .ed__body {
     grid-template-columns: 74px 1fr;
@@ -264,7 +165,7 @@
     grid-area: stage;
   }
   .ed__panel,
-  .ed__props {
+  .ed__right {
     display: none;
   }
 }

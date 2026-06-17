@@ -1,0 +1,129 @@
+@if (!selected()) {
+  <div class="empty">
+    <span class="empty__icon">🎯</span>
+    <p>בחרו אלמנט על הקנבס כדי לערוך אותו.</p>
+    <small>אפשר לגרור אלמנטים, לשנות גודל בעזרת הנקודות בפינות, ולמחוק עם מקש Delete.</small>
+  </div>
+} @else {
+  <div class="pp">
+    <h3 class="pp__title">
+      @if (asText()) { עריכת טקסט } @else if (asShape()) { עריכת צורה } @else { עריכת אלמנט }
+    </h3>
+
+    <!-- TEXT -->
+    @if (asText(); as t) {
+      <div class="field">
+        <label>תוכן הטקסט</label>
+        <textarea
+          class="textarea"
+          rows="3"
+          [value]="t.text"
+          (focus)="sliderStart()"
+          (input)="live({ text: $any($event.target).value })"
+          (blur)="sliderEnd()"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label>גופן</label>
+        <select class="select" [value]="t.fontFamily" (change)="patch({ fontFamily: $any($event.target).value })">
+          @for (f of fonts; track f.value) {
+            <option [value]="f.value">{{ f.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label>גודל גופן · {{ t.fontSize.toFixed(1) }}</label>
+        <input
+          class="range"
+          type="range" min="1.5" max="14" step="0.1"
+          [value]="t.fontSize"
+          (focus)="sliderStart()"
+          (input)="live({ fontSize: num($any($event.target).value) })"
+          (change)="sliderEnd()"
+          (blur)="sliderEnd()"
+        />
+      </div>
+
+      <div class="field">
+        <label>יישור</label>
+        <div class="seg">
+          @for (a of aligns; track a.id) {
+            <button class="seg__btn" [class.is-active]="t.align === a.id" (click)="patch({ align: a.id })" [title]="a.label">
+              {{ a.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <label>סגנון</label>
+        <div class="seg">
+          <button class="seg__btn" [class.is-active]="t.bold" (click)="patch({ bold: !t.bold })"><b>B</b></button>
+          <button class="seg__btn" [class.is-active]="t.italic" (click)="patch({ italic: !t.italic })"><i>I</i></button>
+          <button class="seg__btn" [class.is-active]="t.underline" (click)="patch({ underline: !t.underline })"><u>U</u></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>צבע טקסט</label>
+        <app-color-palette [value]="t.color" (changed)="patch({ color: $event })" />
+      </div>
+    }
+
+    <!-- SHAPE -->
+    @if (asShape(); as s) {
+      @if (s.shape !== 'frame') {
+        <div class="field">
+          <label>צבע מילוי</label>
+          <app-color-palette [value]="s.fill" (changed)="patch({ fill: $event })" />
+        </div>
+      }
+
+      @if (s.shape === 'frame' || s.shape === 'circle' || s.shape === 'rectangle') {
+        <div class="field">
+          <label>צבע מסגרת</label>
+          <app-color-palette [value]="s.stroke" [showPalettes]="false" (changed)="patch({ stroke: $event })" />
+        </div>
+        <div class="field">
+          <label>עובי מסגרת · {{ s.strokeWidth.toFixed(1) }}</label>
+          <input class="range" type="range" min="0" max="6" step="0.1"
+            [value]="s.strokeWidth"
+            (focus)="sliderStart()"
+            (input)="live({ strokeWidth: num($any($event.target).value) })"
+            (change)="sliderEnd()" (blur)="sliderEnd()" />
+        </div>
+      }
+
+      @if (s.shape === 'rectangle' || s.shape === 'frame') {
+        <div class="field">
+          <label>עיגול פינות · {{ s.radius.toFixed(1) }}</label>
+          <input class="range" type="range" min="0" max="20" step="0.5"
+            [value]="s.radius"
+            (focus)="sliderStart()"
+            (input)="live({ radius: num($any($event.target).value) })"
+            (change)="sliderEnd()" (blur)="sliderEnd()" />
+        </div>
+      }
+    }
+
+    <!-- COMMON: opacity -->
+    <div class="field">
+      <label>שקיפות · {{ (selected()!.opacity * 100).toFixed(0) }}%</label>
+      <input class="range" type="range" min="0.1" max="1" step="0.05"
+        [value]="selected()!.opacity"
+        (focus)="sliderStart()"
+        (input)="live({ opacity: num($any($event.target).value) })"
+        (change)="sliderEnd()" (blur)="sliderEnd()" />
+    </div>
+
+    <!-- COMMON: actions -->
+    <div class="pp__actions">
+      <button class="act" (click)="state.duplicate()" title="שכפול">⧉ שכפול</button>
+      <button class="act" (click)="state.bringForward()" title="העברה קדימה">⬆ קדימה</button>
+      <button class="act" (click)="state.sendBackward()" title="העברה אחורה">⬇ אחורה</button>
+      <button class="act act--danger" (click)="state.remove()" title="מחיקה">🗑 מחיקה</button>
+    </div>
+  </div>
+}
