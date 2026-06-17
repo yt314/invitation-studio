@@ -4,6 +4,7 @@ import {
   DesignElement,
   ShapeElement,
   ShapeKind,
+  StickerElement,
   TextAlign,
   TextElement,
 } from '../core/models/design.model';
@@ -199,6 +200,29 @@ export class EditorStateService {
     };
     this.commit((d) => ({ ...d, elements: [...d.elements, el] }));
     this.select(el.id);
+  }
+
+  addSticker(stickerId: string): void {
+    const el: StickerElement = {
+      id: this.genId('k'),
+      type: 'sticker',
+      x: 40,
+      y: 40,
+      width: 18,
+      height: 13,
+      rotation: 0,
+      opacity: 1,
+      stickerId,
+      color: '#c8a45c',
+    };
+    this.commit((d) => ({ ...d, elements: [...d.elements, el] }));
+    this.select(el.id);
+  }
+
+  /** Replace the whole canvas with a template's design (undoable). */
+  applyTemplate(design: DesignDocument): void {
+    this.commit(() => structuredClone(design));
+    this.select(null);
   }
 
   /* --------------------------- Element ops ---------------------------- */

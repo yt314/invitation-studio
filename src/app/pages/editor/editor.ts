@@ -39,7 +39,7 @@ export class Editor {
   private readonly toast = inject(ToastService);
   readonly state = inject(EditorStateService);
 
-  readonly tab = signal<EditorTab>('add');
+  readonly tab = signal<EditorTab>('templates');
   readonly resetOpen = signal(false);
 
   constructor() {

@@ -7,7 +7,8 @@
 } @else {
   <div class="pp">
     <h3 class="pp__title">
-      @if (asText()) { עריכת טקסט } @else if (asShape()) { עריכת צורה } @else { עריכת אלמנט }
+      @if (asText()) { עריכת טקסט } @else if (asShape()) { עריכת צורה }
+      @else if (asSticker()) { עריכת מדבקה } @else { עריכת אלמנט }
     </h3>
 
     <!-- TEXT -->
@@ -106,6 +107,14 @@
             (change)="sliderEnd()" (blur)="sliderEnd()" />
         </div>
       }
+    }
+
+    <!-- STICKER -->
+    @if (asSticker(); as k) {
+      <div class="field">
+        <label>צבע הקישוט</label>
+        <app-color-palette [value]="k.color" (changed)="patch({ color: $event })" />
+      </div>
     }
 
     <!-- COMMON: opacity -->

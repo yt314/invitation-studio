@@ -8,7 +8,7 @@ export interface BackgroundOption {
   type: BackgroundType;
   /** CSS background value applied to the canvas. */
   value: string;
-  group: 'solid' | 'gradient' | 'pattern';
+  group: 'solid' | 'gradient' | 'pattern' | 'decorative';
 }
 
 export const BACKGROUNDS: BackgroundOption[] = [
@@ -95,5 +95,55 @@ export const BACKGROUNDS: BackgroundOption[] = [
     value:
       'radial-gradient(circle at 20% 30%, #f9c0d8 0 6px, transparent 7px), radial-gradient(circle at 70% 60%, #c9b6f7 0 6px, transparent 7px), radial-gradient(circle at 45% 80%, #ffe3a8 0 5px, transparent 6px), #ffffff',
     group: 'pattern',
+  },
+
+  // Decorative (richer, themed backgrounds — still pure CSS)
+  {
+    id: 'd-floral',
+    name: 'פרחוני אלגנטי',
+    type: 'pattern',
+    value:
+      'radial-gradient(circle at 12% 16%, rgba(236,136,180,0.38) 0 16px, transparent 18px), radial-gradient(circle at 88% 22%, rgba(122,166,127,0.34) 0 13px, transparent 15px), radial-gradient(circle at 82% 84%, rgba(236,136,180,0.32) 0 18px, transparent 20px), radial-gradient(circle at 16% 86%, rgba(122,166,127,0.32) 0 13px, transparent 15px), linear-gradient(160deg, #fdf4ee, #fbf7f0)',
+    group: 'decorative',
+  },
+  {
+    id: 'd-floral-pink',
+    name: 'ורוד פורח',
+    type: 'pattern',
+    value:
+      'radial-gradient(circle at 20% 25%, rgba(244,166,198,0.5) 0 14px, transparent 16px), radial-gradient(circle at 78% 30%, rgba(236,136,180,0.42) 0 11px, transparent 13px), radial-gradient(circle at 70% 82%, rgba(244,166,198,0.45) 0 15px, transparent 17px), #fff3f8',
+    group: 'decorative',
+  },
+  {
+    id: 'd-botanical',
+    name: 'בוטני עלים',
+    type: 'pattern',
+    value:
+      'radial-gradient(ellipse 18px 8px at 15% 18%, rgba(61,107,70,0.4) 0 100%, transparent), radial-gradient(ellipse 8px 18px at 86% 24%, rgba(122,166,127,0.4) 0 100%, transparent), radial-gradient(ellipse 18px 8px at 84% 82%, rgba(61,107,70,0.35) 0 100%, transparent), radial-gradient(ellipse 8px 18px at 18% 84%, rgba(122,166,127,0.4) 0 100%, transparent), linear-gradient(160deg, #f1f7ef, #f7fbf4)',
+    group: 'decorative',
+  },
+  {
+    id: 'd-abstract',
+    name: 'מודרני מופשט',
+    type: 'pattern',
+    value:
+      'radial-gradient(42% 48% at 82% 8%, rgba(139,92,246,0.28), transparent 70%), radial-gradient(50% 42% at 8% 28%, rgba(236,72,153,0.24), transparent 70%), radial-gradient(46% 44% at 62% 92%, rgba(59,130,246,0.22), transparent 70%), #ffffff',
+    group: 'decorative',
+  },
+  {
+    id: 'd-gold-lux',
+    name: 'זהב יוקרתי',
+    type: 'pattern',
+    value:
+      'radial-gradient(60% 50% at 50% 0%, rgba(200,164,92,0.28), transparent 70%), repeating-linear-gradient(45deg, rgba(200,164,92,0.08) 0 12px, transparent 12px 24px), linear-gradient(160deg, #1b1712, #2b2114)',
+    group: 'decorative',
+  },
+  {
+    id: 'd-blue-elegant',
+    name: 'כחול אלגנטי',
+    type: 'pattern',
+    value:
+      'radial-gradient(50% 40% at 80% 10%, rgba(125,158,240,0.32), transparent 70%), radial-gradient(45% 40% at 12% 85%, rgba(58,91,191,0.22), transparent 70%), linear-gradient(160deg, #eef3ff, #f6f9ff)',
+    group: 'decorative',
   },
 ];

@@ -95,11 +95,35 @@ export const STICKERS: Sticker[] = [
     group: 'celebration',
     svg: `<svg viewBox="0 0 100 100" fill="currentColor"><ellipse cx="34" cy="56" rx="14" ry="18"/><circle cx="22" cy="40" r="5"/><circle cx="32" cy="36" r="5"/><circle cx="43" cy="38" r="4"/><ellipse cx="70" cy="56" rx="14" ry="18"/><circle cx="58" cy="40" r="5"/><circle cx="68" cy="36" r="5"/><circle cx="79" cy="38" r="4"/></svg>`,
   },
+  {
+    id: 'rose',
+    name: 'ורד',
+    group: 'nature',
+    svg: `<svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 22c10 0 18 7 18 17s-8 19-18 19-18-9-18-19 8-17 18-17z" opacity="0.95"/><path d="M50 30c5 0 9 4 9 9s-4 10-9 10-9-5-9-10 4-9 9-9z" fill="#fff" opacity="0.5"/><path d="M50 58c0 14 0 22 0 28M50 70c-9 0-15-5-18-12M50 78c9 0 15-5 18-12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+  },
+  {
+    id: 'wreath',
+    name: 'זר עלים',
+    group: 'nature',
+    svg: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="50" cy="50" r="34" stroke-dasharray="2 6" opacity="0.5"/><g><path d="M50 16c-6 4-9 10-9 16M50 16c6 4 9 10 9 16"/><path d="M22 32c0 7 3 13 8 17M78 32c0 7-3 13-8 17"/><path d="M18 60c4 6 10 9 16 10M82 60c-4 6-10 9-16 10"/></g></svg>`,
+  },
+  {
+    id: 'frame-ornate',
+    name: 'מסגרת מעוטרת',
+    group: 'dividers',
+    svg: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="10" width="100" height="100"/><rect x="16" y="16" width="88" height="88" opacity="0.6"/><path d="M10 28c8 0 14-6 14-14M110 28c-8 0-14-6-14-14M10 92c8 0 14 6 14 14M110 92c-8 0-14 6-14 14" stroke-width="2.5"/></svg>`,
+  },
+  {
+    id: 'frame-corner',
+    name: 'פינה מעוטרת',
+    group: 'dividers',
+    svg: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10 60V20c0-6 4-10 10-10h40"/><path d="M18 52V26c0-4 3-7 7-7h26" opacity="0.6"/><circle cx="14" cy="14" r="3" fill="currentColor"/></svg>`,
+  },
 ];
 
 export const STICKER_GROUPS: { id: Sticker['group']; label: string }[] = [
   { id: 'celebration', label: 'חגיגה' },
   { id: 'nature', label: 'טבע ופרחים' },
   { id: 'shapes', label: 'צורות' },
-  { id: 'dividers', label: 'מפרידים' },
+  { id: 'dividers', label: 'מפרידים ומסגרות' },
 ];

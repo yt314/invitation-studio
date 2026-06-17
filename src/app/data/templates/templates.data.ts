@@ -330,6 +330,94 @@ export const TEMPLATES: TemplateDefinition[] = [
     },
   },
   {
+    id: 'wedding-floral',
+    name: 'חתונה פרחונית',
+    category: 'wedding',
+    tagline: 'רומנטי ורך עם פריחה עדינה',
+    design: {
+      title: 'חתונה פרחונית',
+      canvas: CANVAS,
+      background: {
+        type: 'pattern',
+        value:
+          'radial-gradient(circle at 12% 16%, rgba(236,136,180,0.38) 0 16px, transparent 18px), radial-gradient(circle at 88% 22%, rgba(122,166,127,0.34) 0 13px, transparent 15px), radial-gradient(circle at 82% 84%, rgba(236,136,180,0.32) 0 18px, transparent 20px), radial-gradient(circle at 16% 86%, rgba(122,166,127,0.32) 0 13px, transparent 15px), linear-gradient(160deg, #fdf4ee, #fbf7f0)',
+      },
+      elements: [
+        stk({ stickerId: 'wreath', x: 36, y: 8, width: 28, height: 20, color: '#7aa67f' }),
+        txt({ text: 'הזמנה לחתונה', y: 30, fontFamily: "'Frank Ruhl Libre', serif", fontSize: 3, color: '#a8557a' }),
+        txt({ text: 'מאיה & אורי', y: 39, fontFamily: "'Dancing Script', cursive", fontSize: 9, color: '#7a3a58', bold: true }),
+        stk({ stickerId: 'divider-leaves', x: 33, y: 56, width: 34, height: 5, color: '#7aa67f' }),
+        txt({ text: 'יום חמישי · 3 ביולי · 19:30', y: 64, fontSize: 3.2, color: '#5b2540', bold: true }),
+        txt({ text: 'גן האירועים פריחה · רמת השרון', y: 71, fontSize: 2.8, color: '#7a4a60' }),
+      ],
+    },
+  },
+  {
+    id: 'engagement-modern',
+    name: 'אירוסין מודרני',
+    category: 'engagement',
+    tagline: 'נקי ועכשווי בסגול ולבן',
+    design: {
+      title: 'אירוסין מודרני',
+      canvas: CANVAS,
+      background: { type: 'solid', value: '#ffffff' },
+      elements: [
+        shp({ shape: 'circle', x: 60, y: -12, width: 52, height: 38, fill: '#ede9fe' }),
+        shp({ shape: 'circle', x: -10, y: 78, width: 40, height: 30, fill: '#fce7f3' }),
+        txt({ text: 'WE ARE ENGAGED', y: 24, fontSize: 2.6, color: '#8b5cf6', letterSpacing: 0.5 }),
+        txt({ text: 'חוגגים אירוסין', y: 34, fontFamily: "'Suez One', serif", fontSize: 7.5, color: '#1b1830', bold: true }),
+        txt({ text: 'בואו לחגוג איתנו את ההתחלה', y: 52, fontSize: 3, color: '#4b4763' }),
+        txt({ text: 'שבת · 21:00', y: 63, fontSize: 3.4, color: '#6d28d9', bold: true }),
+        txt({ text: 'הגג של נועה ודן · תל אביב', y: 70, fontSize: 2.8, color: '#4b4763' }),
+      ],
+    },
+  },
+  {
+    id: 'save-the-date',
+    name: 'Save the Date',
+    category: 'elegant',
+    tagline: 'הודעה מוקדמת אלגנטית',
+    design: {
+      title: 'Save the Date',
+      canvas: CANVAS,
+      background: {
+        type: 'pattern',
+        value:
+          'radial-gradient(50% 40% at 80% 10%, rgba(125,158,240,0.32), transparent 70%), radial-gradient(45% 40% at 12% 85%, rgba(58,91,191,0.22), transparent 70%), linear-gradient(160deg, #eef3ff, #f6f9ff)',
+      },
+      elements: [
+        stk({ stickerId: 'frame-corner', x: 8, y: 8, width: 14, height: 14, color: '#3a5bbf' }),
+        txt({ text: 'שריינו את התאריך', y: 32, fontFamily: "'Frank Ruhl Libre', serif", fontSize: 3, color: '#3a5bbf' }),
+        txt({ text: '08·08·26', y: 42, fontFamily: "'Playfair Display', serif", fontSize: 11, color: '#1e2a52', bold: true }),
+        stk({ stickerId: 'divider-line', x: 34, y: 60, width: 32, height: 4, color: '#3a5bbf' }),
+        txt({ text: 'הזמנה רשמית בהמשך', y: 66, fontSize: 2.8, color: '#3a5bbf' }),
+      ],
+    },
+  },
+  {
+    id: 'birthday-gold',
+    name: 'יום הולדת זהב',
+    category: 'birthday',
+    tagline: 'חגיגי ומפואר בשחור וזהב',
+    design: {
+      title: 'יום הולדת זהב',
+      canvas: CANVAS,
+      background: {
+        type: 'pattern',
+        value:
+          'radial-gradient(60% 50% at 50% 0%, rgba(200,164,92,0.28), transparent 70%), repeating-linear-gradient(45deg, rgba(200,164,92,0.08) 0 12px, transparent 12px 24px), linear-gradient(160deg, #1b1712, #2b2114)',
+      },
+      elements: [
+        stk({ stickerId: 'crown', x: 42, y: 12, width: 16, height: 13, color: '#e7d4a8' }),
+        txt({ text: 'חוגגים יום הולדת', y: 30, fontFamily: "'Playfair Display', serif", fontSize: 3, color: '#e7d4a8', italic: true }),
+        txt({ text: 'מסיבת 30', y: 40, fontFamily: "'Playfair Display', serif", fontSize: 10, color: '#f5e9cf', bold: true }),
+        stk({ stickerId: 'divider-line', x: 34, y: 57, width: 32, height: 4, color: '#c8a45c' }),
+        txt({ text: 'מוצאי שבת · 22:00', y: 64, fontSize: 3.2, color: '#f5e9cf', bold: true }),
+        txt({ text: 'מועדון לילה ZIV · תל אביב', y: 71, fontSize: 2.8, color: '#cbb98f' }),
+      ],
+    },
+  },
+  {
     id: 'modern-bold',
     name: 'מודרני נועז',
     category: 'modern',

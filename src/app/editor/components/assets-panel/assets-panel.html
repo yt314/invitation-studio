@@ -1,70 +1,117 @@
-@if (tab() === 'add') {
-  <h3 class="panel-title">הוספת אלמנטים</h3>
-  <p class="panel-sub">לחצו כדי להוסיף לקנבס</p>
+@switch (tab()) {
+  <!-- ============================ TEMPLATES ============================ -->
+  @case ('templates') {
+    <h3 class="panel-title">תבניות מוכנות</h3>
+    <p class="panel-sub">לחצו כדי להחיל תבנית על הקנבס</p>
 
-  <button class="add-btn" (click)="state.addText()">
-    <span class="add-btn__icon">T</span>
-    <span class="add-btn__txt"><b>טקסט</b><small>כותרת, תאריך, מיקום…</small></span>
-  </button>
-
-  <span class="group-name">צורות</span>
-  <div class="shape-grid">
-    <button class="shape-btn" (click)="state.addShape('rectangle')" title="מלבן">
-      <span class="shape-prev shape-prev--rect"></span>
-      <small>מלבן</small>
-    </button>
-    <button class="shape-btn" (click)="state.addShape('circle')" title="עיגול">
-      <span class="shape-prev shape-prev--circle"></span>
-      <small>עיגול</small>
-    </button>
-    <button class="shape-btn" (click)="state.addShape('line')" title="קו">
-      <span class="shape-prev shape-prev--line"></span>
-      <small>קו</small>
-    </button>
-    <button class="shape-btn" (click)="state.addShape('frame')" title="מסגרת">
-      <span class="shape-prev shape-prev--frame"></span>
-      <small>מסגרת</small>
-    </button>
-  </div>
-}
-
-@if (tab() === 'background') {
-  <h3 class="panel-title">רקע הקנבס</h3>
-  <p class="panel-sub">בחרו רקע מוכן או צבע מותאם</p>
-
-  <div class="group">
-    <span class="group-name">צבע אחיד</span>
-    <div class="bg-grid">
-      @for (b of bgGroups().solid; track b.id) {
-        <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'solid')" [title]="b.name"></button>
+    <div class="tpl-grid">
+      @for (t of templates; track t.id) {
+        <button class="tpl" (click)="applyTemplate(t)" [title]="t.name">
+          <span class="tpl__canvas">
+            <app-design-preview [design]="templateDoc(t)" />
+          </span>
+          <span class="tpl__name">{{ t.name }}</span>
+        </button>
       }
     </div>
-  </div>
+  }
 
-  <div class="group">
-    <span class="group-name">גרדיאנט</span>
-    <div class="bg-grid">
-      @for (b of bgGroups().gradient; track b.id) {
-        <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'gradient')" [title]="b.name"></button>
-      }
+  <!-- ============================== ADD ================================ -->
+  @case ('add') {
+    <h3 class="panel-title">הוספת אלמנטים</h3>
+    <p class="panel-sub">לחצו כדי להוסיף לקנבס</p>
+
+    <button class="add-btn" (click)="state.addText()">
+      <span class="add-btn__icon">T</span>
+      <span class="add-btn__txt"><b>טקסט</b><small>כותרת, תאריך, מיקום…</small></span>
+    </button>
+
+    <span class="group-name">צורות</span>
+    <div class="shape-grid">
+      <button class="shape-btn" (click)="state.addShape('rectangle')" title="מלבן">
+        <span class="shape-prev shape-prev--rect"></span>
+        <small>מלבן</small>
+      </button>
+      <button class="shape-btn" (click)="state.addShape('circle')" title="עיגול">
+        <span class="shape-prev shape-prev--circle"></span>
+        <small>עיגול</small>
+      </button>
+      <button class="shape-btn" (click)="state.addShape('line')" title="קו">
+        <span class="shape-prev shape-prev--line"></span>
+        <small>קו</small>
+      </button>
+      <button class="shape-btn" (click)="state.addShape('frame')" title="מסגרת">
+        <span class="shape-prev shape-prev--frame"></span>
+        <small>מסגרת</small>
+      </button>
     </div>
-  </div>
+  }
 
-  <div class="group">
-    <span class="group-name">תבנית</span>
-    <div class="bg-grid">
-      @for (b of bgGroups().pattern; track b.id) {
-        <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'pattern')" [title]="b.name"></button>
-      }
+  <!-- ============================ STICKERS ============================= -->
+  @case ('stickers') {
+    <h3 class="panel-title">מדבקות וקישוטים</h3>
+    <p class="panel-sub">פרחים, עלים, לבבות, מסגרות ועוד</p>
+
+    @for (g of stickerGroups; track g.id) {
+      <span class="group-name">{{ g.label }}</span>
+      <div class="stk-grid">
+        @for (s of stickersIn(g.id); track s.id) {
+          <button class="stk" (click)="state.addSticker(s.id)" [title]="s.name">
+            <span class="stk__art" [innerHTML]="svgFor(s.svg)"></span>
+          </button>
+        }
+      </div>
+    }
+  }
+
+  <!-- =========================== BACKGROUND ============================ -->
+  @case ('background') {
+    <h3 class="panel-title">רקע הקנבס</h3>
+    <p class="panel-sub">בחרו רקע מוכן או צבע מותאם</p>
+
+    <div class="group">
+      <span class="group-name">מעוצב</span>
+      <div class="bg-grid">
+        @for (b of bgGroups().decorative; track b.id) {
+          <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'pattern')" [title]="b.name"></button>
+        }
+      </div>
     </div>
-  </div>
 
-  <div class="group">
-    <span class="group-name">צבע מותאם אישית</span>
-    <app-color-palette
-      [value]="currentSolid"
-      [showPalettes]="false"
-      (changed)="state.setBackground($event, 'solid')"
-    />
-  </div>
+    <div class="group">
+      <span class="group-name">צבע אחיד</span>
+      <div class="bg-grid">
+        @for (b of bgGroups().solid; track b.id) {
+          <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'solid')" [title]="b.name"></button>
+        }
+      </div>
+    </div>
+
+    <div class="group">
+      <span class="group-name">גרדיאנט</span>
+      <div class="bg-grid">
+        @for (b of bgGroups().gradient; track b.id) {
+          <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'gradient')" [title]="b.name"></button>
+        }
+      </div>
+    </div>
+
+    <div class="group">
+      <span class="group-name">תבנית</span>
+      <div class="bg-grid">
+        @for (b of bgGroups().pattern; track b.id) {
+          <button class="bg" [style.background]="b.value" (click)="state.setBackground(b.value, 'pattern')" [title]="b.name"></button>
+        }
+      </div>
+    </div>
+
+    <div class="group">
+      <span class="group-name">צבע מותאם אישית</span>
+      <app-color-palette
+        [value]="currentSolid"
+        [showPalettes]="false"
+        (changed)="state.setBackground($event, 'solid')"
+      />
+    </div>
+  }
 }

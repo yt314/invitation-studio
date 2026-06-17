@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import {
   DesignElement,
   ShapeElement,
+  StickerElement,
   TextAlign,
   TextElement,
 } from '../../../core/models/design.model';
@@ -29,6 +30,10 @@ export class PropertiesPanel {
   readonly asShape = computed<ShapeElement | null>(() => {
     const s = this.selected();
     return s?.type === 'shape' ? s : null;
+  });
+  readonly asSticker = computed<StickerElement | null>(() => {
+    const s = this.selected();
+    return s?.type === 'sticker' ? s : null;
   });
 
   readonly aligns: { id: TextAlign; icon: string; label: string }[] = [

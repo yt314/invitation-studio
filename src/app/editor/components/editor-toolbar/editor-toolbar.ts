@@ -12,9 +12,17 @@ import { EditorTab } from '../../editor.types';
   template: `
     <div class="rail">
       <div class="rail__group">
+        <button class="tool" [class.is-active]="tab() === 'templates'" (click)="tabChange.emit('templates')" title="תבניות">
+          <span class="tool__icon">🖼️</span>
+          <span class="tool__label">תבניות</span>
+        </button>
         <button class="tool" [class.is-active]="tab() === 'add'" (click)="tabChange.emit('add')" title="הוספת אלמנטים">
           <span class="tool__icon">➕</span>
           <span class="tool__label">הוספה</span>
+        </button>
+        <button class="tool" [class.is-active]="tab() === 'stickers'" (click)="tabChange.emit('stickers')" title="מדבקות וקישוטים">
+          <span class="tool__icon">✨</span>
+          <span class="tool__label">מדבקות</span>
         </button>
         <button class="tool" [class.is-active]="tab() === 'background'" (click)="tabChange.emit('background')" title="רקע">
           <span class="tool__icon">🎨</span>
