@@ -1,0 +1,270 @@
+:host {
+  display: block;
+}
+
+.ed {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+/* Top bar */
+.ed__top {
+  height: 60px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-inline: 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  z-index: 5;
+}
+.ed__top-side {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ed__logo {
+  font-weight: 800;
+  font-size: 17px;
+  white-space: nowrap;
+}
+.ed__logo b {
+  color: var(--brand-700);
+}
+.ed__title {
+  border: 1.5px solid transparent;
+  background: var(--surface-3);
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  max-width: 220px;
+  transition: border-color 0.16s, background 0.16s;
+}
+.ed__title:focus {
+  outline: none;
+  background: var(--surface);
+  border-color: var(--brand-300);
+}
+.ed__top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ed__act {
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: all 0.16s;
+}
+.ed__act--ghost:hover {
+  border-color: var(--brand-300);
+  color: var(--ink);
+}
+.ed__act--primary {
+  background: var(--grad-brand);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--sh-brand);
+}
+.ed__act--primary:hover {
+  transform: translateY(-1px);
+}
+
+/* Body layout */
+.ed__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 88px 280px 1fr 280px;
+  min-height: 0;
+}
+
+/* Tool rail */
+.ed__rail {
+  background: var(--surface);
+  border-inline-end: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 8px;
+  overflow-y: auto;
+}
+.ed__tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  border-radius: var(--r-md);
+  padding: 11px 4px;
+  color: var(--ink-soft);
+  transition: background 0.16s, color 0.16s;
+}
+.ed__tool-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 800;
+}
+.ed__tool-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+.ed__tool:hover {
+  background: var(--surface-3);
+  color: var(--ink);
+}
+.ed__tool.is-active {
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+/* Left panel */
+.ed__panel,
+.ed__props {
+  background: var(--surface);
+  overflow-y: auto;
+  padding: 18px 16px;
+}
+.ed__panel {
+  border-inline-end: 1px solid var(--line);
+}
+.ed__props {
+  border-inline-start: 1px solid var(--line);
+}
+.ed__panel-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+.ed__panel-sub {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ed__group {
+  margin-top: 20px;
+}
+.ed__group-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.ed__bg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.ed__bg {
+  aspect-ratio: 1;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 10px;
+  cursor: pointer;
+  background-size: cover;
+  transition: transform 0.14s, box-shadow 0.14s, border-color 0.14s;
+}
+.ed__bg:hover {
+  transform: scale(1.07);
+  border-color: var(--brand-400);
+  box-shadow: var(--sh-sm);
+}
+
+/* Coming-soon panel */
+.ed__soon {
+  text-align: center;
+  padding: 40px 10px;
+  color: var(--ink-soft);
+}
+.ed__soon-icon {
+  font-size: 42px;
+}
+.ed__soon h3 {
+  margin-top: 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+.ed__soon p {
+  margin-top: 8px;
+  font-size: 13.5px;
+}
+.ed__soon-btn {
+  margin-top: 16px;
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: var(--r-pill);
+}
+
+/* Canvas stage */
+.ed__stage {
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  overflow: auto;
+  background:
+    radial-gradient(circle at center, rgba(124, 58, 237, 0.05), transparent 70%),
+    var(--surface-3);
+}
+.ed__canvas-wrap {
+  filter: drop-shadow(0 24px 48px rgba(27, 24, 48, 0.18));
+}
+.ed__canvas {
+  width: min(56vh, 440px);
+  aspect-ratio: 5 / 7;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Properties empty */
+.ed__props-empty {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+}
+.ed__props-empty span {
+  font-size: 36px;
+}
+.ed__props-empty p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.ed__props-empty small {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+/* Responsive: stack panels under the canvas on small screens */
+@media (max-width: 1100px) {
+  .ed__body {
+    grid-template-columns: 74px 1fr;
+    grid-template-areas: 'rail stage';
+  }
+  .ed__rail {
+    grid-area: rail;
+  }
+  .ed__stage {
+    grid-area: stage;
+  }
+  .ed__panel,
+  .ed__props {
+    display: none;
+  }
+}

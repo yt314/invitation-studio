@@ -1,0 +1,53 @@
+<div class="auth">
+  <aside class="auth__aside">
+    <span class="auth__orb auth__orb--1"></span>
+    <span class="auth__orb auth__orb--2"></span>
+    <h2>הצטרפו ל‑Invite Studio</h2>
+    <p>פתחו חשבון חינמי והתחילו לעצב הזמנות מרהיבות לכל אירוע — בלי הגבלה.</p>
+    <ul class="auth__bullets">
+      <li><span>✓</span> חינם לחלוטין, ללא תשלום</li>
+      <li><span>✓</span> עשרות תבניות מוכנות</li>
+      <li><span>✓</span> שמירה והורדה ב‑PNG ו‑PDF</li>
+    </ul>
+  </aside>
+
+  <div class="auth__form-wrap">
+    <div class="auth__card">
+      <h1>הרשמה</h1>
+      <p>כמה פרטים ואתם בפנים</p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth__fields">
+        <div class="field">
+          <label for="name">שם מלא</label>
+          <input id="name" class="input" type="text" formControlName="name" placeholder="ישראל ישראלי" autocomplete="name" />
+          @if (submitted() && form.controls.name.invalid) {
+            <span class="field-error">יש להזין שם (לפחות 2 תווים)</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">אימייל</label>
+          <input id="email" class="input" type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" />
+          @if (submitted() && form.controls.email.invalid) {
+            <span class="field-error">יש להזין כתובת אימייל תקינה</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="password">סיסמה</label>
+          <input id="password" class="input" type="password" formControlName="password" placeholder="לפחות 6 תווים" autocomplete="new-password" />
+          @if (submitted() && form.controls.password.invalid) {
+            <span class="field-error">הסיסמה חייבת לכלול לפחות 6 תווים</span>
+          }
+        </div>
+
+        <app-button class="auth__submit" type="submit" variant="primary" [block]="true" [loading]="loading()">
+          יצירת חשבון
+        </app-button>
+      </form>
+
+      <p class="auth__alt">כבר רשומים? <a routerLink="/login">התחברו כאן</a></p>
+      <div class="auth__note">💡 בשלב זה ההרשמה היא לדמו מקומי. חיבור Firebase אמיתי מתווסף בשלב 4.</div>
+    </div>
+  </div>
+</div>

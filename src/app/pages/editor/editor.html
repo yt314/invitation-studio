@@ -1,0 +1,104 @@
+<div class="ed">
+  <!-- Top bar -->
+  <header class="ed__top">
+    <div class="ed__top-side">
+      <a routerLink="/" class="ed__logo" title="חזרה לבית">
+        <span>Invite<b>Studio</b></span>
+      </a>
+      <input
+        class="ed__title"
+        [value]="design().title"
+        (input)="setTitle($any($event.target).value)"
+        aria-label="שם העיצוב"
+      />
+    </div>
+
+    <div class="ed__top-actions">
+      <button class="ed__act ed__act--ghost" (click)="comingSoon()">↩ ביטול</button>
+      <button class="ed__act ed__act--ghost" (click)="comingSoon()">↪ חזרה</button>
+      <button class="ed__act ed__act--ghost" (click)="comingSoon()">💾 שמירה</button>
+      <button class="ed__act ed__act--primary" (click)="comingSoon()">⬇ הורדה</button>
+    </div>
+  </header>
+
+  <div class="ed__body">
+    <!-- Tool rail -->
+    <nav class="ed__rail">
+      @for (t of tools; track t.id) {
+        <button
+          class="ed__tool"
+          [class.is-active]="activeTool() === t.id"
+          (click)="selectTool(t.id)"
+          [title]="t.label"
+        >
+          <span class="ed__tool-icon">{{ t.icon }}</span>
+          <span class="ed__tool-label">{{ t.label }}</span>
+        </button>
+      }
+    </nav>
+
+    <!-- Left panel (contextual) -->
+    <aside class="ed__panel">
+      @switch (activeTool()) {
+        @case ('background') {
+          <h3 class="ed__panel-title">רקע הקנבס</h3>
+          <p class="ed__panel-sub">בחרו רקע — הקנבס מתעדכן מיד</p>
+
+          <div class="ed__group">
+            <span class="ed__group-name">צבע אחיד</span>
+            <div class="ed__bg-grid">
+              @for (b of bgGroups().solid; track b.id) {
+                <button class="ed__bg" [style.background]="b.value" (click)="setBackground(b.value, 'solid')" [title]="b.name"></button>
+              }
+            </div>
+          </div>
+
+          <div class="ed__group">
+            <span class="ed__group-name">גרדיאנט</span>
+            <div class="ed__bg-grid">
+              @for (b of bgGroups().gradient; track b.id) {
+                <button class="ed__bg" [style.background]="b.value" (click)="setBackground(b.value, 'gradient')" [title]="b.name"></button>
+              }
+            </div>
+          </div>
+
+          <div class="ed__group">
+            <span class="ed__group-name">תבנית / דוגמה</span>
+            <div class="ed__bg-grid">
+              @for (b of bgGroups().pattern; track b.id) {
+                <button class="ed__bg" [style.background]="b.value" (click)="setBackground(b.value, 'pattern')" [title]="b.name"></button>
+              }
+            </div>
+          </div>
+        }
+        @default {
+          <div class="ed__soon">
+            <span class="ed__soon-icon">🚧</span>
+            <h3>הכלי הזה בדרך</h3>
+            <p>הוספת טקסט, צורות ומדבקות עם גרירה חופשית מתווספת בשלב 2 של הפרויקט. בינתיים אפשר להחליף רקעים ולראות את הקנבס בפעולה.</p>
+            <button class="ed__soon-btn" (click)="selectTool('background')">למעבר לרקעים</button>
+          </div>
+        }
+      }
+    </aside>
+
+    <!-- Canvas stage -->
+    <main class="ed__stage">
+      <div class="ed__canvas-wrap">
+        <div class="ed__canvas">
+          <app-design-preview [design]="design()" />
+        </div>
+      </div>
+    </main>
+
+    <!-- Right properties panel -->
+    <aside class="ed__props">
+      <h3 class="ed__panel-title">מאפיינים</h3>
+      <div class="ed__props-empty">
+        <span>🎯</span>
+        <p>בחרו אלמנט על הקנבס כדי לערוך את המאפיינים שלו.</p>
+        <small>פאנל המאפיינים המלא מתווסף בשלב 2.</small>
+      </div>
+    </aside>
+  </div>
+</div>

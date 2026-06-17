@@ -1,0 +1,31 @@
+<div class="container profile">
+  <div class="profile__card">
+    <div class="profile__banner"></div>
+    <div class="profile__avatar">{{ initials(auth.user()?.displayName) }}</div>
+
+    <div class="profile__info">
+      <h1>{{ auth.user()?.displayName }}</h1>
+      <p>{{ auth.user()?.email }}</p>
+    </div>
+
+    <div class="profile__rows">
+      <div class="profile__row">
+        <span class="profile__label">שם מלא</span>
+        <span class="profile__value">{{ auth.user()?.displayName }}</span>
+      </div>
+      <div class="profile__row">
+        <span class="profile__label">אימייל</span>
+        <span class="profile__value">{{ auth.user()?.email }}</span>
+      </div>
+      <div class="profile__row">
+        <span class="profile__label">מזהה משתמש</span>
+        <span class="profile__value profile__value--mono">{{ auth.user()?.uid }}</span>
+      </div>
+    </div>
+
+    <div class="profile__actions">
+      <app-button variant="secondary" link="/my-designs">העיצובים שלי</app-button>
+      <app-button variant="danger" (pressed)="logout()">התנתקות</app-button>
+    </div>
+  </div>
+</div>

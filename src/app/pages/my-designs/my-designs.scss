@@ -1,0 +1,122 @@
+.head {
+  background: var(--grad-hero);
+  padding-block: 48px 36px;
+}
+.head__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.head h1 {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  margin: 12px 0 6px;
+}
+.head p {
+  color: var(--ink-soft);
+}
+
+.body {
+  padding-block: 40px 80px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Real cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+  transition: transform 0.24s var(--ease), box-shadow 0.24s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sh-lg);
+}
+.card__preview {
+  aspect-ratio: 5 / 7;
+  background: var(--surface-3);
+}
+.card__meta {
+  padding: 14px 16px;
+}
+.card__meta h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Skeletons */
+.card-skel {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 14px;
+  background: var(--surface);
+}
+.card-skel__img {
+  aspect-ratio: 5 / 7;
+  width: 100%;
+}
+.card-skel__line {
+  height: 14px;
+  margin-top: 12px;
+  width: 70%;
+}
+.card-skel__line--sm {
+  width: 40%;
+  margin-top: 8px;
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 50px 28px;
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-xl);
+}
+.empty__art {
+  font-size: 60px;
+  animation: float-y 4s ease-in-out infinite;
+}
+.empty h2 {
+  margin-top: 14px;
+  font-size: 24px;
+  font-weight: 800;
+}
+.empty p {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+.empty__cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

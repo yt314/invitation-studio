@@ -1,0 +1,45 @@
+<div class="auth">
+  <aside class="auth__aside">
+    <span class="auth__orb auth__orb--1"></span>
+    <span class="auth__orb auth__orb--2"></span>
+    <h2>ברוכים השבים ל‑Invite Studio</h2>
+    <p>התחברו כדי לגשת לעיצובים השמורים שלכם ולהמשיך ליצור הזמנות מרהיבות.</p>
+    <ul class="auth__bullets">
+      <li><span>✓</span> כל העיצובים שלכם במקום אחד</li>
+      <li><span>✓</span> עריכה והורדה בכל זמן</li>
+      <li><span>✓</span> שמירה אוטומטית בענן</li>
+    </ul>
+  </aside>
+
+  <div class="auth__form-wrap">
+    <div class="auth__card">
+      <h1>התחברות</h1>
+      <p>שמחים לראות אתכם שוב</p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth__fields">
+        <div class="field">
+          <label for="email">אימייל</label>
+          <input id="email" class="input" type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" />
+          @if (submitted() && form.controls.email.invalid) {
+            <span class="field-error">יש להזין כתובת אימייל תקינה</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="password">סיסמה</label>
+          <input id="password" class="input" type="password" formControlName="password" placeholder="••••••••" autocomplete="current-password" />
+          @if (submitted() && form.controls.password.invalid) {
+            <span class="field-error">הסיסמה חייבת לכלול לפחות 6 תווים</span>
+          }
+        </div>
+
+        <app-button class="auth__submit" type="submit" variant="primary" [block]="true" [loading]="loading()">
+          התחברות
+        </app-button>
+      </form>
+
+      <p class="auth__alt">אין לכם חשבון? <a routerLink="/register">הירשמו עכשיו</a></p>
+      <div class="auth__note">💡 בשלב זה ההתחברות היא לדמו מקומי. חיבור Firebase אמיתי מתווסף בשלב 4.</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<section class="head">
+  <div class="container head__inner">
+    <div>
+      <span class="eyebrow">לוח העיצובים שלי</span>
+      <h1>העיצובים שלי</h1>
+      <p>שלום {{ auth.user()?.displayName }} — כאן יופיעו כל ההזמנות שיצרתם.</p>
+    </div>
+    <app-button variant="primary" link="/editor">+ עיצוב חדש</app-button>
+  </div>
+</section>
+
+<div class="container body">
+  @if (loading()) {
+    <div class="grid">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="card-skel">
+          <div class="skeleton card-skel__img"></div>
+          <div class="skeleton card-skel__line"></div>
+          <div class="skeleton card-skel__line card-skel__line--sm"></div>
+        </div>
+      }
+    </div>
+  } @else if (designs().length === 0) {
+    <div class="empty">
+      <div class="empty__art">🎨</div>
+      <h2>עדיין אין לכם עיצובים</h2>
+      <p>זה הזמן ליצור את ההזמנה הראשונה שלכם. בחרו תבנית מהממת או התחילו מאפס.</p>
+      <div class="empty__cta">
+        <app-button variant="primary" link="/templates">עיון בתבניות</app-button>
+        <app-button variant="secondary" link="/editor">התחלה מקנבס ריק</app-button>
+      </div>
+    </div>
+  } @else {
+    <div class="grid">
+      @for (d of designs(); track d.id) {
+        <article class="card">
+          <div class="card__preview">
+            <app-design-preview [design]="d" />
+          </div>
+          <div class="card__meta">
+            <h3>{{ d.title }}</h3>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</div>

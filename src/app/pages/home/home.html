@@ -1,0 +1,103 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="container hero__inner">
+    <div class="hero__copy animate-up">
+      <span class="eyebrow">סטודיו עיצוב הזמנות · חינמי</span>
+      <h1>
+        עצבו הזמנות
+        <span class="gradient-text">מרהיבות</span>
+        לכל אירוע
+      </h1>
+      <p class="hero__lead">
+        Invite Studio הוא עורך הזמנות מקוון בסגנון Canva — בחרו תבנית, התאימו צבעים,
+        גופנים ומדבקות, והורידו הזמנה מושלמת תוך דקות. ללא הורדות, ללא תשלום.
+      </p>
+      <div class="hero__cta">
+        <app-button size="lg" variant="primary" link="/editor">התחילו לעצב</app-button>
+        <app-button size="lg" variant="secondary" link="/templates">עיון בתבניות</app-button>
+      </div>
+      <div class="hero__trust">
+        <div><b>14+</b><span>תבניות מוכנות</span></div>
+        <div><b>∞</b><span>אפשרויות עיצוב</span></div>
+        <div><b>PNG · PDF</b><span>ייצוא איכותי</span></div>
+      </div>
+    </div>
+
+    <div class="hero__cards" aria-hidden="true">
+      @for (t of heroCards; track t.id; let i = $index) {
+        <div class="hero__card" [class]="'hero__card--' + i">
+          <app-design-preview [design]="toDoc(t)" />
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">למה Invite Studio</span>
+      <h2>כל מה שצריך כדי לעצב הזמנה מושלמת</h2>
+    </div>
+    <div class="features__grid">
+      @for (f of features; track f.title) {
+        <div class="feature">
+          <span class="feature__icon">{{ f.icon }}</span>
+          <h3>{{ f.title }}</h3>
+          <p>{{ f.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="section steps">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">פשוט להפליא</span>
+      <h2>שלושה צעדים להזמנה מוכנה</h2>
+    </div>
+    <div class="steps__grid">
+      @for (s of steps; track s.n) {
+        <div class="step">
+          <span class="step__n">{{ s.n }}</span>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section showcase">
+  <div class="container">
+    <div class="sec-head sec-head--row">
+      <div>
+        <span class="eyebrow">גלריית תבניות</span>
+        <h2>השראה לכל אירוע</h2>
+      </div>
+      <app-button variant="secondary" link="/templates">לכל התבניות</app-button>
+    </div>
+    <div class="showcase__grid">
+      @for (t of showcase; track t.id) {
+        <app-template-card [template]="t" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container cta__inner">
+    <h2>מוכנים לעצב את ההזמנה שלכם?</h2>
+    <p>הצטרפו עכשיו והתחילו ליצור — בחינם לחלוטין.</p>
+    <div class="cta__btns">
+      <app-button size="lg" variant="gold" link="/register">פתחו חשבון חינם</app-button>
+      <app-button size="lg" variant="ghost" link="/editor">קפצו ישר לעורך</app-button>
+    </div>
+  </div>
+</section>
