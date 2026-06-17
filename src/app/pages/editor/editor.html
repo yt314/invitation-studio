@@ -27,7 +27,7 @@
       <button class="ed__act ed__act--ghost" (click)="save()" [disabled]="saving()">
         {{ saving() ? '… שומר' : (currentId() ? '💾 עדכון' : '💾 שמירה') }}
       </button>
-      <button class="ed__act ed__act--primary" (click)="downloadSoon()">⬇ הורדה</button>
+      <button class="ed__act ed__act--primary" (click)="openDownload()">⬇ הורדה</button>
     </div>
   </header>
 
@@ -62,6 +62,8 @@
     </aside>
   </div>
 </div>
+
+<app-download-dialog [design]="state.design()" [open]="downloadOpen()" (closed)="downloadOpen.set(false)" />
 
 <app-modal [open]="resetOpen()" heading="איפוס העיצוב" (closed)="resetOpen.set(false)">
   <p>פעולה זו תחזיר את העיצוב למצב ההתחלתי שלו. כל השינויים שביצעתם יימחקו. להמשיך?</p>

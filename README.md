@@ -132,15 +132,47 @@ You can now register a user, log in, and save/load designs. 🎉
 
 ## ☁️ Deploy to Firebase Hosting (free)
 
+Everything is pre-configured: `firebase.json` already points Hosting at the
+Angular build output (`dist/invite-studio/browser`) with an SPA rewrite, and
+`firestore.rules` is ready to deploy.
+
+### Full deployment steps
+
 ```bash
-npm run build                     # builds to dist/invite-studio/browser
-firebase deploy --only hosting    # uses firebase.json
-# or deploy everything:
-firebase deploy
+# 1. Install dependencies and verify the app locally
+npm install
+npm start                         # → http://localhost:4200
+
+# 2. Build the production bundle
+ng build                          # outputs to dist/invite-studio/browser
+
+# 3. Log in to Firebase
+npm install -g firebase-tools     # one-time
+firebase login
+
+# 4. (First time only) link this folder to your Firebase project.
+#    Either edit .firebaserc and replace YOUR_FIREBASE_PROJECT_ID, OR run:
+firebase init
+#    → choose "Hosting" and "Firestore", select your existing project,
+#      set public dir to: dist/invite-studio/browser,
+#      configure as a single-page app: Yes,
+#      keep the existing firestore.rules / firebase.json when asked.
+
+# 5. Deploy
+firebase deploy                   # deploys hosting + firestore rules
+# or selectively:
+firebase deploy --only hosting
+firebase deploy --only firestore:rules
 ```
 
-`firebase.json` is already configured (public dir + SPA rewrite). Make sure
-`.firebaserc` points to your project id.
+Your app goes live at `https://YOUR_PROJECT_ID.web.app`. 🚀
+
+### Deployment checklist
+- ✅ Real Firebase config pasted into `src/environments/environment.ts`
+- ✅ Email/Password sign-in enabled in **Authentication**
+- ✅ **Cloud Firestore** database created
+- ✅ Security rules deployed (`firebase deploy --only firestore:rules`)
+- ✅ `.firebaserc` points to your project id
 
 ---
 
@@ -163,4 +195,16 @@ Templates, backgrounds, stickers and color palettes are **bundled in the app**
 - ✅ Phase 2 — Interactive DOM editor
 - ✅ Phase 3 — Templates, backgrounds, stickers, palettes, polish
 - ✅ Phase 4 — Firebase Auth + Firestore (save/load/edit/duplicate/delete)
-- ⏭️ Phase 5 — Export to PNG/PDF, responsive polish, deployment
+- ✅ Phase 5 — Export to PNG/PDF, responsive polish, deployment
+
+---
+
+## ⬇️ Export / download
+
+Open any design in the editor and click **⬇ הורדה**. A dialog lets you choose:
+- **PNG** — a high-resolution image (rendered at 2× via `html-to-image`).
+- **PDF** — a clean, centered single-page A4 (`jsPDF`).
+
+Exports come from an off-screen, full-resolution render of the design, so the
+file looks exactly like the finished invitation — with correct Hebrew/RTL text
+and no editor selection handles. The file name is taken from the design title.

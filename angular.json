@@ -25,6 +25,16 @@
             "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "jspdf",
+              "html2canvas",
+              "dompurify",
+              "canvg",
+              "core-js",
+              "raf",
+              "rgbcolor",
+              "performance-now"
+            ],
             "assets": [
               {
                 "glob": "**/*",

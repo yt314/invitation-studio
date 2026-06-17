@@ -11,6 +11,7 @@ import { EditorToolbar } from '../../editor/components/editor-toolbar/editor-too
 import { AssetsPanel } from '../../editor/components/assets-panel/assets-panel';
 import { PropertiesPanel } from '../../editor/components/properties-panel/properties-panel';
 import { LayersPanel } from '../../editor/components/layers-panel/layers-panel';
+import { DownloadDialog } from '../../editor/components/download-dialog/download-dialog';
 import { Modal } from '../../shared/components/modal/modal';
 import { Button } from '../../shared/components/button/button';
 
@@ -30,6 +31,7 @@ import { Button } from '../../shared/components/button/button';
     AssetsPanel,
     PropertiesPanel,
     LayersPanel,
+    DownloadDialog,
     Modal,
     Button,
   ],
@@ -46,6 +48,7 @@ export class Editor {
 
   readonly tab = signal<EditorTab>('templates');
   readonly resetOpen = signal(false);
+  readonly downloadOpen = signal(false);
 
   /** Firestore id of the design being edited (null = unsaved/new). */
   readonly currentId = signal<string | null>(null);
@@ -148,7 +151,9 @@ export class Editor {
     this.toast.success('העיצוב אופס למצב ההתחלתי');
   }
 
-  downloadSoon(): void {
-    this.toast.info('הורדה ל‑PNG/PDF מתווספת בשלב הבא 🙂');
+  openDownload(): void {
+    // Deselect first so the export render is clean (no selection outline).
+    this.state.select(null);
+    this.downloadOpen.set(true);
   }
 }

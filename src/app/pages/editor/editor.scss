@@ -175,20 +175,55 @@
   animation: spin 0.8s linear infinite;
 }
 
-/* Responsive: hide side panels, keep rail + canvas usable on small screens */
+/* Responsive: stack everything vertically so all panels stay usable.
+   Order: canvas on top, then tools, contextual panel, and properties. */
 @media (max-width: 1100px) {
-  .ed__body {
-    grid-template-columns: 74px 1fr;
-    grid-template-areas: 'rail stage';
+  .ed {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
   }
-  .ed__rail {
-    grid-area: rail;
+  .ed__body {
+    display: flex;
+    flex-direction: column;
   }
   .ed__stage {
-    grid-area: stage;
+    order: 0;
+    min-height: 58vh;
+    padding: 18px;
   }
-  .ed__panel,
+  .ed__canvas {
+    width: min(72vw, 320px);
+  }
+  .ed__rail {
+    order: 1;
+    border-inline-end: none;
+    border-block: 1px solid var(--line);
+    position: sticky;
+    top: 60px;
+    z-index: 4;
+  }
+  .ed__panel {
+    order: 2;
+    border-inline-end: none;
+    border-bottom: 1px solid var(--line);
+    max-height: 50vh;
+  }
   .ed__right {
-    display: none;
+    order: 3;
+    border-inline-start: none;
+  }
+  .ed__layers {
+    max-height: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .ed__title {
+    max-width: 120px;
+  }
+  .ed__act {
+    padding: 8px 10px;
+    font-size: 12.5px;
   }
 }

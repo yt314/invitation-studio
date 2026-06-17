@@ -94,6 +94,28 @@ import { EditorTab } from '../../editor.types';
         background: #fdeaea;
         color: var(--danger);
       }
+
+      /* On small screens the rail becomes a horizontal scrolling toolbar. */
+      @media (max-width: 1100px) {
+        .rail {
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 4px;
+          padding: 8px 10px;
+          overflow-x: auto;
+        }
+        .rail__group {
+          flex-direction: row;
+        }
+        .rail__group--bottom {
+          margin-inline-start: auto;
+        }
+        .tool {
+          flex: none;
+          padding: 8px 12px;
+        }
+      }
     `,
   ],
 })
